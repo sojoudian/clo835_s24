@@ -1,5 +1,5 @@
-# Builder stage
-FROM golang:1.22 AS builder
+# Using a Debian-based Go image
+FROM golang:1.22
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
@@ -16,18 +16,10 @@ COPY . .
 # Build the Go app
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o myapp .
 
-# Final stage
-FROM alpine:latest  
-
 # Add ca-certificates in case you need to call HTTPS endpoints
-RUN apk --no-cache add ca-certificates
+RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /root/
-
-# Copy the Pre-built binary file from the previous stage
-COPY --from=builder /app/myapp .
-
-# Expose port 8080 to the outside world
+# Expose port 3000 to the outside world
 EXPOSE 3000
 
 # Command to run the executable
