@@ -31,7 +31,7 @@ func main() {
 	mongoClient = client
 
 	http.HandleFunc("/items", itemsHandler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":3000", nil))
 }
 
 func itemsHandler(w http.ResponseWriter, r *http.Request) {
