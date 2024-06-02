@@ -6,7 +6,7 @@ from bson import json_util
 app = Flask(__name__)
 
 # Connect to MongoDB
-mongo_client = MongoClient("mongodb://localhost:27017")
+mongo_client = MongoClient("mongodb://mongodb:27017")
 db = mongo_client['mydb']
 collection = db['items']
 
@@ -29,11 +29,10 @@ def post_item():
         if not item_data:
             raise ValueError("No data provided")
         result = collection.insert_one(item_data)
-        # MongoDB creates an '_id' which is of ObjectId type, convert it to string
         item_data['_id'] = str(result.inserted_id)
         return jsonify(item_data), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
 if __name__ == '__main__':
-    app.run(port=3000)
+    app.run(host='0.0.0.0', port=3000)
