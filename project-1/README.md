@@ -1,7 +1,7 @@
 
-# Project Title
+# Python API Server
 
-A brief description of what this project does and who it's for.
+This is a simple Python API Server using POST to save data to MongoDB and GET requests to receive the data from MongoDB.
 
 ## Prerequisites
 
@@ -43,10 +43,14 @@ pip install -r requirements.txt
 To start the server, run:
 
 ```bash
-python your_script_name.py
+python app.py
 ```
 
 Ensure your MongoDB instance is running and accessible as configured in your Python script.
+```bash
+docker run --name mongodb-container -d -p 27017:27017 -v my_mongo_data:/data/db mongo:latest
+```
+
 
 ## Using the Application
 
@@ -64,12 +68,7 @@ Contributions to enhance the project are welcome. Please fork the repository and
 
 ## License
 
-This project is licensed under the [License Name].
+This project is licensed under the GPLv3.
 
 ---
 
-### Notes:
-
-- **Python Script Name**: Replace `your_script_name.py` with the actual name of your Python script that runs the HTTP server.
-- **License**: You can specify the license under which your project is released.
-- **Configuration Details**: If there are additional configuration steps or important information about the project setup (like database configuration), be sure to include them.
